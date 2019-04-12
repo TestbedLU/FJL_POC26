@@ -1,0 +1,80 @@
+<html>
+<head>
+	<title>OSM Buildings</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<link href="http://cdn.osmbuildings.org/4.0.1/OSMBuildings.css" rel="stylesheet">
+	<script src="http://cdn.osmbuildings.org/4.0.1/OSMBuildings.js"></script>
+</head>
+
+<body>
+	<div id="map"></div>
+	<div id="controls" style="position:absolute; top:10px; left:10px; border:solid 1px black; border-radius:5px; background-color:white; padding:10px;">
+		<div>
+			<label>Tilt:</label>
+			<input id="tiltVal" type="text" value="30" />
+			<button id="tiltBtn" onclick="setTilt();">Set tilt</button>
+		</div>
+		<div>
+			<button id="rotateBtn" onclick="rotate();">Rotate</button>
+		</div>
+	</div>
+</body>
+<script>
+	const options = {
+		container: 'map',
+		position: { latitude: 55.7281347, longitude: 13.19019 },
+		zoom: 19.6,
+		minZoom: 1,
+		maxZoom: 30,
+		tilt: 0,
+		rotation: 0,
+		fastMode: true,
+		attribution: '© Data <a href="http://openstreetmap.org/copyright/">OpenStreetMap</a> © 3D <a href="https://osmbuildings.org/copyright/">OSM Buildings</a>'
+	};
+	const map = new OSMBuildings(options);
+
+	//map.addMapTiles('https://server.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}');
+	map.addMapTiles('http://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
+	// map.addGeoJSONTiles('https://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json');
+
+	const obj = map.addOBJ(
+		'http://localhost/fjl/resources/ManuellBox.obj',
+		options.position,
+		{ id:"test_building", color:'red', scale:1, rotation:0}
+	);
+
+	animateTiltMap(30, 1, 20);
+
+	function rotate(){
+		animateRotateMap(360, 1, 20);
+	}
+	
+	function setTilt(){
+		const tiltVal = document.getElementById("tiltVal").value;
+		map.setTilt(tiltVal);
+	}
+
+	function animateTiltMap(endTiltAngle, deltaAngle, timeout){
+		var tilt = map.getTilt();
+
+		const tilter = setInterval(_ => {
+			tilt += deltaAngle;
+
+			if (tilt >= endTiltAngle) clearInterval(tilter);
+			else map.setTilt(tilt);
+		}, timeout);
+	}
+
+	function animateRotateMap(endRotationAngle, deltaAngle, timeout){
+		var rotation = map.getRotation();
+
+		const rotater = setInterval(_ => {
+			rotation += deltaAngle;
+
+			if (rotation >= endRotationAngle) clearInterval(rotater);
+			else map.setRotation(rotation);
+		}, timeout);
+	}
+
+</script>
+</html>

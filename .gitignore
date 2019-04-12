@@ -1,0 +1,6 @@
+*.log
+node_modules/
+package-lock.json
+resources/fjl.js
+resources/detaljplan
+.idea
