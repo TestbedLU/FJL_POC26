@@ -13,19 +13,27 @@ const tiles = {
 		url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 		maxZoom: 19.4
 	},
+	lm_topowebb: {
+		url: 'http://localhost:5000/topowebb/{z}/{y}/{x}.png',
+		maxZoom: 19.4
+	},
+	lm_orto: {
+		url: 'http://localhost:5000/proxy/{z}/{y}/{x}.png',
+		maxZoom: 19.4
+	},
 };
 
 export default class OSMB{
 	constructor(options){
-		const tile = tiles.topo;
+		const tile = tiles.lm_topowebb;
 
 		this.options = Object.assign({}, {
 			container: 'map',
 			// position: { latitude: 55.7281347, longitude: 13.19019 },
 			position: { latitude: 56.2261568, longitude: 12.7270405 },
 			// zoom: 17.4,
-			zoom: 18.2,
-			minZoom: 10,
+			zoom: 15,
+			minZoom: 2,
 			maxZoom: 20.2,
 			tilt: 0,
 			rotation: 0,
@@ -52,17 +60,17 @@ export default class OSMB{
 		let mapTiles = this._osmb.addMapTiles(tile.url);
 		// this._osmb.addGeoJSONTiles('https://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json');
 
-		this._osmb.on('zoom', e => {
-			console.log("zoom", e.zoom);
-			if (e.zoom <= tile.maxZoom && mapTiles === undefined){
-				console.log("adding tiles");
-				mapTiles = this._osmb.addMapTiles(tile.url);
-			} else if (e.zoom > tile.maxZoom && mapTiles !== undefined){
-				console.log("removing tiles");
-				this._osmb.remove(mapTiles);
-				mapTiles = undefined;
-			}
-		});
+		// this._osmb.on('zoom', e => {
+		// 	console.log("zoom", e.zoom);
+		// 	if (e.zoom <= tile.maxZoom && mapTiles === undefined){
+		// 		console.log("adding tiles");
+		// 		mapTiles = this._osmb.addMapTiles(tile.url);
+		// 	} else if (e.zoom > tile.maxZoom && mapTiles !== undefined){
+		// 		console.log("removing tiles");
+		// 		this._osmb.remove(mapTiles);
+		// 		mapTiles = undefined;
+		// 	}
+		// });
 	}
 
 	loadObj(objName){
