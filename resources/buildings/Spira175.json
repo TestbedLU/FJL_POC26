@@ -1,0 +1,12 @@
+{
+	"husID":"HJ124",
+	"husTillverkare":"Hjaltevadshus",
+	"husModell":"Spira175",
+	"egenskaper":{
+		"byggnadsHojd":4.6,
+		"nockHojd":7.4,
+		"Takvinkel":34,
+		"byggnadsArea":110,
+		"byggnadsAndamal":"Bostad"
+	}
+}

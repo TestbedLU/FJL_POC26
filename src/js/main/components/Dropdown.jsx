@@ -6,7 +6,8 @@ export default class Dropdown extends Component{
 		super(props);
 
 		this.state = {
-			dropdownOpen: false
+			dropdownOpen: false,
+			selectedItemKey: undefined
 		};
 
 		this.outsideClickHandler = this.handleOutsideClick.bind(this);
@@ -24,10 +25,11 @@ export default class Dropdown extends Component{
 	}
 
 	onDropDownItemClick(selectedItemKey){
-		if (this.props.itemClickAction) {
-			this.setState({dropdownOpen: !this.state.dropdownOpen});
+		if (selectedItemKey!== this.state.selectedItemKey) {
 			this.props.itemClickAction(selectedItemKey);
 		}
+
+		this.setState({dropdownOpen: !this.state.dropdownOpen, selectedItemKey});
 	}
 
 	componentWillUnmount(){

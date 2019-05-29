@@ -1,0 +1,12 @@
+{
+	"husID":"HJ123",
+	"husTillverkare":"Hjaltevadshus",
+	"husModell":"Spira168",
+	"egenskaper":{
+		"byggnadsHojd":3.8,
+		"nockHojd":7.9,
+		"Takvinkel":45,
+		"byggnadsArea":110,
+		"byggnadsAndamal":"Bostad"
+	}
+}

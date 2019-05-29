@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './NavigationTools.css';
 import Dropdown from './Dropdown.jsx';
+import HouseRotation from './HouseRotation.jsx';
 
-export const navigation = {
+const navigation = {
 	north: {
 		angle: 180,
 		className: 'fas fa-arrow-down',
@@ -25,18 +26,26 @@ export const navigation = {
 	}
 };
 
+const findOrientation = (rotation = 0) => {
+	return Object.keys(navigation)
+		.find(key => navigation[key].angle === rotation);
+};
+
 const tiltAngels = {
 	0: "0 grader",
-	10: "10 grader",
-	20: "20 grader",
+	15: "15 grader",
 	30: "30 grader",
-	40: "40 grader",
-	50: "50 grader"
+	45: "45 grader"
+};
+
+const isDefinedTilt = tiltAngle => {
+	return Object.keys(tiltAngels).map(a => parseInt(a)).includes(tiltAngle);
 };
 
 const buildings = {
 	Spira168: 'Spira168',
-	Spira175: 'Spira175'
+	Spira175: 'Spira175',
+	SpiraHighRoofRidge: 'Spira High Roof',
 };
 
 
@@ -46,13 +55,25 @@ export default class NavigationTools extends Component{
 
 		this.rotate = props.rotate;
 		this.tilt = props.tilt;
-		this.building = props.building;
+		this.addHouse = props.addHouse;
 
 		this.state = {
 			activeOrientation: props.initialOrientation || 'south',
 			selectedTilt: undefined,
 			selectedBuilding: undefined
-		}
+		};
+	}
+
+	componentWillReceiveProps(nextProps, nextContext) {
+		const newActiveOrientation = findOrientation(nextProps.rotationAngle);
+		const newSelectedTilt = nextProps.tiltAngle === undefined
+			? 0
+			: isDefinedTilt(nextProps.tiltAngle) ? nextProps.tiltAngle : undefined;
+
+		this.setState({
+			activeOrientation: newActiveOrientation,
+			selectedTilt: newSelectedTilt
+		});
 	}
 
 	handleArrowClick(orientation){
@@ -61,18 +82,19 @@ export default class NavigationTools extends Component{
 	}
 
 	handleTiltClick(angle){
-		const tiltAngle = parseInt(angle);
-		this.setState({selectedTilt: tiltAngle});
-		this.tilt(tiltAngle);
+		const selectedTilt = parseInt(angle);
+		this.setState({selectedTilt});
+		this.tilt(selectedTilt);
 	}
 
 	handleBuildingClick(objName){
 		this.setState({selectedBuilding: objName});
-		this.building(objName);
+		this.addHouse(objName);
 	}
 
 	render(){
 		const {selectedTilt, selectedBuilding} = this.state;
+		const {rotateHouse, isHouseAdded, houseRotation} = this.props;
 
 		return (
 			<div id="navigationTools">
@@ -82,6 +104,12 @@ export default class NavigationTools extends Component{
 					<Arrow self={this} orientation={'south'} />
 					<Arrow self={this} orientation={'west'} />
 				</span>
+
+				<HouseRotation
+					rotateHouse={rotateHouse}
+					isHouseAdded={isHouseAdded}
+					houseRotation={houseRotation}
+				/>
 
 				<span id="tilt">
 					<Dropdown

@@ -3,4 +3,8 @@ node_modules/
 package-lock.json
 resources/fjl.js
 resources/detaljplan
+resources/tiles
+resources/web.config
 .idea
+src/python
+venv

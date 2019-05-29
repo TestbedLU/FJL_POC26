@@ -1,0 +1,12 @@
+{
+	"husID":"HJ133",
+	"husTillverkare":"Hjaltevadshus",
+	"husModell":"SpiraHighRoofRidge",
+	"egenskaper":{
+		"byggnadsHojd":3.8,
+		"nockHojd":8.2,
+		"Takvinkel":47,
+		"byggnadsArea":110,
+		"byggnadsAndamal":"Bostad"
+	}
+}
