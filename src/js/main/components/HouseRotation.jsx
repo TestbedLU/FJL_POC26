@@ -57,11 +57,9 @@ export default class HouseRotation extends Component{
 
 	updateFootprint(){
 		const {remove, addGeoJSON, housePosition} = this.props.houseRotation;
-		// console.log({remove, addGeoJSON, housePosition, angle: this.rotationAngle});
 
-		// if (this.footprint) remove(this.footprint);
 		this.footprints.forEach(footprint => remove(footprint));
-		// this.footprint = addGeoJSON(housePosition.getGeoJson(this.rotationAngle));
+
 		if (housePosition.hasFootprintCornerData) {
 			this.footprints.push(addGeoJSON(housePosition.getGeoJson(this.rotationAngle)));
 		}

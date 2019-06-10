@@ -6,7 +6,6 @@ import classifyPoint from 'robust-point-in-polygon';
 
 export default class PIP {
 	constructor(geometry, attributes){
-		// console.log({geometry, attributes});
 		this.geometry = geometry || [];
 		this.attributes = attributes || [];
 	}

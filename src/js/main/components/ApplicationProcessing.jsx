@@ -27,7 +27,6 @@ export default class ApplicationProcessing extends Component{
 
 	handleSubmit(isYes, submitApplication){
 		if (submitApplication){
-			// console.log(this.props.submitApplication, {isYes, submitApplication});
 			this.props.submitApplication();
 			this.setState({isOpen: false});
 			return;
@@ -61,7 +60,6 @@ export default class ApplicationProcessing extends Component{
 		const {isReadyForProcessing, isApplicationOk} = this.props;
 		const btnCls = isReadyForProcessing ? "btn btn-primary" : "btn btn-primary disabled";
 		const btnStyle = {position:'absolute', zIndex:999, top:5, right:20};
-		// console.log({isReadyForProcessing, processingFns: this.processingFns});
 
 		return (
 			<Fragment>

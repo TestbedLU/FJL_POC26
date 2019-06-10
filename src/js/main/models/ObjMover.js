@@ -26,7 +26,6 @@ export default class ObjMover {
 
 		this._osmb.on('pointerdown', xy => {
 			const isRotationBtn = xy.button === 2;
-			// console.log({xy, isRotationBtn, latLng: this._osmb.unproject(xy.x, xy.y)});
 
 			if (isRotationBtn){
 				this._mapDiv.style.cursor = 'all-scroll';
@@ -68,7 +67,6 @@ export default class ObjMover {
 		});
 
 		this._osmb.on('pointerup', target => {
-			// console.log('pointerup', {target});
 			this._isPointerDown = false;
 			this._osmb.setDisabled(false);
 

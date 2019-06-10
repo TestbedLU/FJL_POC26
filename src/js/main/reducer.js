@@ -125,8 +125,6 @@ const validateHouse = (housePosition, pip, buildingAttributes) => {
 		? undefined
 		: houseAttributes.egenskaper.nockHojd < parcelAttributes.maxNockHojd;
 
-	// console.log({parcelAttributes, houseAttributes, housePosition, pip});
-
 	return {
 		isValidPosition,
 		isValidArea,

@@ -1,6 +1,5 @@
 export default class HousePosition{
 	constructor(objName, position = {}, rotation = 0, doRedraw = true, footPrint){
-		// console.log({objName, position, rotation, doRedraw, footPrint});
 		this.objName = objName;
 		this.latitude = position.latitude;
 		this.longitude = position.longitude;

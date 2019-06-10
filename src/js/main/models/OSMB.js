@@ -106,9 +106,6 @@ export default class OSMB{
 			{ id: "building_walls", scale: 1, rotation: housePosition.rotation, color: 'rgb(250,250,250)'}
 		);
 
-		// console.log('building_walls:', this._buildingWalls);
-		// console.log('housePosition:', housePosition);
-
 		// No callback on 'addObj'. Wait until it is done
 		const intervalId = setInterval(_=> {
 			if (this._buildingWalls.metersPerLon) {
@@ -125,9 +122,6 @@ export default class OSMB{
 		);
 
 		this._objMover = new ObjMover(this._osmb, this._buildingWalls, this._buildingRoof, this.helpers.moveHouse);
-		// this.helpers.fetchBuildingMeta(getUrl(`buildings/${housePosition.objName}.json`));
-
-		// const {_buildingWalls, _buildingRoof, _objMover} = this;
 	}
 
 	animateTiltMap(endTiltAngle, deltaAngle, timeout){

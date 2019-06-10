@@ -8,7 +8,6 @@ export default class HousePositionPanel extends Component {
 
 	render(){
 		const {show, isValidPosition, isValidArea, isValidBuildingHeight, isValidRidgeHeight} = this.props;
-		// console.log({show, isValidPosition, isValidArea, isValidBuildingHeight, isValidRidgeHeight});
 
 		return (
 			<Content

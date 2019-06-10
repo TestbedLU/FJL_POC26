@@ -58,24 +58,11 @@ export default class Map extends Component{
 
 		if (gotParcelDefs){
 			this.map.loadParcels(nextProps.parcels, nextProps.allowed);
-			// const point1 = [12.5840400, 56.1928013];	// Correct
-			// const point2 = [12.5839542, 56.1929380];	// Incorrect
-			// console.log({isValidPoint: nextProps.pip.isValidPoint(point1)});
-			// console.log({isValidPoint: nextProps.pip.isValidPoint(point2)});
 		}
 
 		if (nextProps.housePosition.redrawHouse(this.props.housePosition)) {
 			this.map.loadObj(nextProps.housePosition);
 		}
-
-		// const housePosition = nextProps.housePosition;
-		//
-		// if (housePosition && housePosition.hasFootprint) {
-		// 	// console.log({housePosition});
-		//
-		// 	if (this.footprint) this.map.osmb.remove(this.footprint);
-		// 	this.footprint = this.map.osmb.addGeoJSON(housePosition.getGeoJson());
-		// }
 	}
 
 	render(){
@@ -85,7 +72,6 @@ export default class Map extends Component{
 		const isApplicationOk = isHouseAdded && isValidPosition && isValidArea && isValidBuildingHeight && isValidRidgeHeight;
 		const addGeoJSON = this.map ? this.map.osmb.addGeoJSON : undefined;
 		const remove = this.map ? this.map.osmb.remove : undefined;
-		// console.log({props: this.props, isValidPosition});
 
 		return (
 			<Fragment>
