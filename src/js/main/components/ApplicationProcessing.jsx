@@ -34,7 +34,6 @@ export default class ApplicationProcessing extends Component{
 
 		if (isYes) {
 			this.setState({isApplicationReady: isYes});
-			// this.props.submitApplication();
 		} else {
 			this.setState({
 				isOpen: false

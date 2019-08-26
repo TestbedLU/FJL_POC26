@@ -1,5 +1,4 @@
-import {ERROR, INIT, TOAST, ROTATION, TILT, ROTATE_HOUSE, ADD_HOUSE, MOVE_HOUSE, FETCHED_OBJ,
-	FETCHED_BUILDING_META, FETCHED_BUILDING_DEFS} from './actions';
+import {actionTypes} from './actions';
 import * as Toaster from 'icos-cp-toaster';
 import HousePosition from "./models/HousePosition";
 import HouseFootprint from "./models/HouseFootprint";
@@ -30,12 +29,12 @@ export default (state = initState, action) => {
 
 	switch(action.type){
 
-		case ERROR:
+		case actionTypes.ERROR:
 			return update({
 				toasterData: new Toaster.ToasterData(Toaster.TOAST_ERROR, action.error.message.split('\n')[0])
 			});
 
-		case INIT:
+		case actionTypes.INIT:
 			const parcels = updateParcels(action.parcels);
 
 			return update({
@@ -44,23 +43,23 @@ export default (state = initState, action) => {
 				pip: new PIP(getGeometry(action.allowed), getAttributes(parcels))
 			});
 
-		case ROTATION:
+		case actionTypes.ROTATION:
 			return update({
 				rotationAngle: action.rotation
 			});
 
-		case TILT:
+		case actionTypes.TILT:
 			return update({
 				tiltAngle: action.tilt
 			});
 
-		case ADD_HOUSE:
+		case actionTypes.ADD_HOUSE:
 			return update({
 				isHouseAdded: true,
 				housePosition: state.housePosition.addHouse(action.objName, action.position, state.housePosition.rotation)
 			});
 
-		case MOVE_HOUSE:
+		case actionTypes.MOVE_HOUSE:
 			housePosition = state.housePosition.moveHouse(action.position);
 
 			return update({
@@ -68,7 +67,7 @@ export default (state = initState, action) => {
 				houseValidation: validateHouse(housePosition, state.pip, state.buildingAttributes)
 			});
 
-		case ROTATE_HOUSE:
+		case actionTypes.ROTATE_HOUSE:
 			housePosition = state.housePosition.withRotation(action.rotation);
 
 			return update({
@@ -77,7 +76,7 @@ export default (state = initState, action) => {
 				houseValidation: validateHouse(housePosition, state.pip, state.buildingAttributes)
 			});
 
-		case FETCHED_OBJ:
+		case actionTypes.FETCHED_OBJ:
 			housePosition = state.housePosition.withFootprint(new HouseFootprint(action.objTxt, action.metersPerLon));
 
 			return update({
@@ -85,17 +84,17 @@ export default (state = initState, action) => {
 				houseValidation: validateHouse(housePosition, state.pip, state.buildingAttributes)
 			});
 
-		case FETCHED_BUILDING_META:
+		case actionTypes.FETCHED_BUILDING_META:
 			return update({
 				buildingMeta: action.buildingMeta
 			});
 
-		case FETCHED_BUILDING_DEFS:
+		case actionTypes.FETCHED_BUILDING_DEFS:
 			return update({
 				buildingAttributes: new BuildingAttributes(action.buildingAttributes)
 			});
 
-		case TOAST:
+		case actionTypes.TOAST:
 			return update({
 				toasterData: action.toasterData,
 				autoCloseDelay: action.autoCloseDelay

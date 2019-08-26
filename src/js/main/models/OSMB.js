@@ -100,7 +100,6 @@ export default class OSMB{
 		if (this._buildingRoof) this._osmb.remove(this._buildingRoof);
 
 		this._buildingWalls = this._osmb.addOBJ(
-			// getUrl(housePosition.objName + '_walls.obj'),
 			getUrl(`buildings/${housePosition.objName}_horisontal_wall.obj`),
 			housePosition.position,
 			{ id: "building_walls", scale: 1, rotation: housePosition.rotation, color: 'rgb(250,250,250)'}
